@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   characters.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 15:07:02 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/07 14:45:05 by ademarti         ###   ########.fr       */
+/*   Created: 2023/12/07 16:10:08 by ademarti          #+#    #+#             */
+/*   Updated: 2023/12/07 16:59:09 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "printf.h"
 
-# include <stdarg.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
+int	ft_putstr(char *s)
+{
+	size_t	i;
 
-int	ft_printf(const char *, ...);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
+}
 
-#endif
+characters(va_list args)
+{
+	size_t	i;
+
+	ft_putstr(args);
+	i = ft_putstr(args);
+	return (i);
+}

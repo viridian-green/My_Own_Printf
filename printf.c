@@ -6,65 +6,114 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:40:31 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/08 14:11:32 by ademarti         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:39:45 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "printf.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdarg.h>
 
-int	writeformat(const char *s, va_list args)
+void	ft_putchar_fd(char c, int fd)
 {
-	size_t	pos;
+	write(fd, &c, 1);
+}
 
-	pos = 0;
-	while (s[pos] != '\0')
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (s[pos] == '%')
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
+void ft_string(char *str, int fd)
+{
+	ft_putstr_fd(str, fd);
+
+}
+
+void ft_char(char c, int fd)
+{
+	ft_putchar_fd(c, fd);
+}
+int	writeformat(const char *s, va_list args_copy);
+
+void data_type_check(const char *s, va_list args_copy)
+{
+	size_t	i;
+
+	i = 0;
+if (s[i] == 'c' )
+	ft_char(va_arg(args_copy, int), 1);
+if (s[i] == 's' )
+	ft_string(va_arg(args_copy, char *), 1);
+/*
+if (s[i] == 'p' )
+	ft_string(va_arg(args_copy, char *));
+if (s[i] == '%' )
+	ft_string(va_arg(args_copy, char *));
+if (s[i] == 'd' || s[i] == 'i' )
+	ft_int(va_arg(args_copy, int));
+if (s[i + 1] == 'u' )
+	ft_string(va_arg(args_copy, char *));
+if (s[i] == 'x' )
+	ft_string(va_arg(args_copy, char *));
+if (s[i] == 'i' )
+	ft_string(va_arg(args_copy, char *));
+if (s[i] == 'X' )
+	ft_string(va_arg(args_copy, char *));
+	*/
+}
+
+int	writeformat(const char *s, va_list args_copy)
+{
+	size_t	i;
+	char *result;
+
+	i = 0;
+
+	while (s[i] != '\0')
+	{
+		if (s[i] == '%')
 		{
-			if (s[pos + 1] == 'c' || s[pos + 1] == 's' || s[pos + 1] == 'p' || s[pos + 1] == '%')
-			{
-				char *current_arg = va_arg(args, char *);
-				characters(current_arg);
-				pos = pos + characters(current_arg);
-			}
-			else if (s[pos + 1] == 'd' || s[pos + 1] == 'i' || s[pos + 1] == 'u'|| s[pos + 1] == 'x' ||
-			s[pos + 1] == 'X')
-			{
-				int current_arg = va_arg(args, int);
-				numbers(current_arg);
-				pos = pos + characters(current_arg);
-			}
+			i++;
+			data_type_check(&s[i], args_copy);
+			i++;
 		}
 		else
 		{
-			write(1, &s[pos], 1);
+			write(1, &s[i], 1);
 		}
-		pos++;
+		i++;
 	}
-	return (pos);
+	va_end(args_copy);
+	return (i);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	va_start(args, format);
-	size_t	i;
-	i = 0;
 
-	while (i < format)
-	{
-		const char *value = va_arg(args, char*);
-		i++;
-	}
+	va_list args_copy;
+    va_copy(args_copy, args);
+	writeformat(format, args_copy);
 
-	if (va_arg( args,  char * ))
-	if (va_arg( args,  char))
-	if (va_arg( args,  int)) //%d
-	if (va_arg( args,  int)) //%i
-	if (va_arg( args,  unsigned int)) //%u
-	if (va_arg( args,  void *))
-	if (va_arg( args,  unsigned int)) //%x
-	if (va_arg( args,  unsigned int)) //%X
-	if (va_arg( args,  char)) //%% percent sign
-	va_end (args);
+	va_end(args);
+	return (-1);
+}
+
+int main()
+{
+	int quatre;
+	quatre = 4;
+	ft_printf("The answer is %c %s.\n", 's',"hello");
+	printf("The answer is %c.\n", 's');
 }

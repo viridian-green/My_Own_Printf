@@ -1,6 +1,6 @@
 NAME			= printf.a
 
-SRCS = printf.c
+SRCS = printf.c characters.c
 
 OBJ := $(SRCS:%.c=%.o)
 

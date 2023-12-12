@@ -6,15 +6,13 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:40:31 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/12 14:39:45 by ademarti         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:53:48 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "printf.h"
 #include <stdio.h>
-#include <unistd.h>
-#include <stdarg.h>
 
 void	ft_putchar_fd(char c, int fd)
 {
@@ -39,10 +37,15 @@ void ft_string(char *str, int fd)
 
 }
 
-void ft_char(char c, int fd)
+char ft_char(char c, int fd)
 {
-	ft_putchar_fd(c, fd);
+	char result;
+
+	result = (char)malloc((sizeof(char) * 1));
+	result = ft_putchar_fd(c, fd);
+
 }
+
 int	writeformat(const char *s, va_list args_copy);
 
 void data_type_check(const char *s, va_list args_copy)
@@ -75,7 +78,6 @@ if (s[i] == 'X' )
 int	writeformat(const char *s, va_list args_copy)
 {
 	size_t	i;
-	char *result;
 
 	i = 0;
 
@@ -112,8 +114,6 @@ int	ft_printf(const char *format, ...)
 
 int main()
 {
-	int quatre;
-	quatre = 4;
 	ft_printf("The answer is %c %s.\n", 's',"hello");
 	printf("The answer is %c.\n", 's');
 }

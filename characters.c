@@ -6,30 +6,37 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:10:08 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/07 16:59:09 by ademarti         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:46:44 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	ft_putstr(char *s)
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
 	{
-		write(1, &s[i], 1);
+		write(fd, &s[i], 1);
 		i++;
 	}
-	return (i);
 }
 
-characters(va_list args)
+void ft_string(char *str, int fd)
 {
-	size_t	i;
+	ft_putstr_fd(str, fd);
 
-	ft_putstr(args);
-	i = ft_putstr(args);
-	return (i);
+}
+
+void ft_char(char c, int fd)
+{
+	ft_putchar_fd(c, fd);
 }

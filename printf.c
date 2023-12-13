@@ -6,13 +6,14 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:40:31 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 14:16:46 by ademarti         ###   ########.fr       */
+/*   Updated: 2023/12/13 15:22:52 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "libft/libft.h"
+#include "ft_printf.h"
 #include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 void	ft_putchar_fd(char c, int fd)
 {
@@ -124,7 +125,34 @@ void ft_hexa_uppercase(unsigned int c)
 		}
 	}
 }
+/*
+void	ft_pointer(size_t pointer, int *length)
+{
+	char	string[25];
+	int		i;
+	char	*base_character;
 
+	base_character = "0123456789abcdef";
+	i = 0;
+	write(1, "0x", 2);
+	//(*length) += 2;
+	if (pointer == 0)
+	{
+		ft_putcharacter_length('0', length);
+		return ;
+	}
+	while (pointer != 0)
+	{
+		string[i] = base_character[pointer % 16];
+		pointer = pointer / 16;
+		i++;
+	}
+	while (i--)
+	{
+		ft_putcharacter_length(string[i], length);
+	}
+}
+*/
 void data_type_check(const char *s, va_list args_copy)
 {
 	size_t	i;
@@ -146,16 +174,17 @@ if (s[i] == 'X' )
 	ft_hexa_uppercase(va_arg(args_copy, unsigned int));
 /*
 if (s[i] == 'p' )
-	ft_string(va_arg(args_copy, void *));
+	ft_put_ptr(va_arg(args_copy, size_t));
 */
 }
 
 int	writeformat(const char *s, va_list args_copy)
 {
 	size_t	i;
+	int	count;
 
 	i = 0;
-
+	count = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] == '%')
@@ -170,7 +199,7 @@ int	writeformat(const char *s, va_list args_copy)
 		i++;
 	}
 	va_end(args_copy);
-	return (i);
+	return (count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -181,15 +210,15 @@ int	ft_printf(const char *format, ...)
 	va_list args_copy;
     va_copy(args_copy, args);
 	writeformat(format, args_copy);
-
 	va_end(args);
-	return (-1);
+	return (0);
 }
 
+/*
 int main()
 {
-	unsigned int n = 255;
-	//ft_printf("The answer is %p %X.\n", n, n);
-	printf("The answer is %p %X.\n", "hey", n);
+	//unsigned int n = 255;
+	ft_printf("%%");
+	//printf("%%");
 }
-
+*/

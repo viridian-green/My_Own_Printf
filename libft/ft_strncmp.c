@@ -1,47 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:23 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 13:44:44 by ademarti         ###   ########.fr       */
+/*   Created: 2023/11/16 13:45:04 by ademarti          #+#    #+#             */
+/*   Updated: 2023/12/05 15:17:38 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_hex_len(unsigned	int num)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	len;
+	size_t	i;
 
-	len = 0;
-	while (num != 0)
+	i = 0;
+	if (n <= 0)
+		return (0);
+	while (s1[i] != '\0' && s2[i] != '\0' && i < n - 1 && s1[i] == s2[i])
 	{
-		len++;
-		num = num / 16;
+		i++;
 	}
-	return (len);
-}
-
-void ft_hexa(unsigned int c)
-{
-	if (c >= 16)
-	{
-		ft_put_hex(c / 16);
-		ft_put_hex(c % 16);
-	}
-	else
-	{
-		if (c <= 9)
-			ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
-		return (write(1, "0", 1));
-		else
-		{
-				ft_putchar_fd((c - 10 + 'a'), 1);
-		}
-	}
+	return (*((unsigned char *)s1 + i) - *((unsigned char *)s2 + i));
 }

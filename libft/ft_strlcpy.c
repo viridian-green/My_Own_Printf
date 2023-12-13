@@ -1,47 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:23 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 13:44:44 by ademarti         ###   ########.fr       */
+/*   Created: 2023/11/16 12:12:26 by ademarti          #+#    #+#             */
+/*   Updated: 2023/12/05 15:10:03 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_hex_len(unsigned	int num)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int	len;
+	size_t	count;
+	size_t	size;
 
-	len = 0;
-	while (num != 0)
+	count = 0;
+	size = 0;
+	if (!dst)
+		return (0);
+	size = ft_strlen(src);
+	if (!dstsize)
+		return (size);
+	while (src[count] && count < dstsize - 1)
 	{
-		len++;
-		num = num / 16;
+		dst[count] = src[count];
+		count++;
 	}
-	return (len);
-}
-
-void ft_hexa(unsigned int c)
-{
-	if (c >= 16)
-	{
-		ft_put_hex(c / 16);
-		ft_put_hex(c % 16);
-	}
-	else
-	{
-		if (c <= 9)
-			ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
-		return (write(1, "0", 1));
-		else
-		{
-				ft_putchar_fd((c - 10 + 'a'), 1);
-		}
-	}
+	dst[count] = '\0';
+	return (size);
 }

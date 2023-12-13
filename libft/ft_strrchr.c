@@ -1,47 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:23 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 13:44:44 by ademarti         ###   ########.fr       */
+/*   Created: 2023/11/16 13:49:54 by ademarti          #+#    #+#             */
+/*   Updated: 2023/12/05 15:13:43 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_hex_len(unsigned	int num)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	len;
+	unsigned int		i;
+	char				*last_occurrence;
+	char				cc;
 
-	len = 0;
-	while (num != 0)
+	i = 0;
+	cc = (char)c;
+	last_occurrence = NULL;
+	while (s[i] != '\0')
 	{
-		len++;
-		num = num / 16;
-	}
-	return (len);
-}
-
-void ft_hexa(unsigned int c)
-{
-	if (c >= 16)
-	{
-		ft_put_hex(c / 16);
-		ft_put_hex(c % 16);
-	}
-	else
-	{
-		if (c <= 9)
-			ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
-		return (write(1, "0", 1));
-		else
+		if (s[i] == cc)
 		{
-				ft_putchar_fd((c - 10 + 'a'), 1);
+			last_occurrence = (char *)&s[i];
 		}
+		i++;
 	}
+	if (s[i] == cc)
+		last_occurrence = (char *)&s[i];
+	return (last_occurrence);
 }

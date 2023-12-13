@@ -1,47 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:23 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 13:44:44 by ademarti         ###   ########.fr       */
+/*   Created: 2023/11/17 12:19:38 by ademarti          #+#    #+#             */
+/*   Updated: 2023/12/07 13:15:28 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_hex_len(unsigned	int num)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int	len;
+	char	*p_dest;
+	char	*p_src;
 
-	len = 0;
-	while (num != 0)
+	p_dest = (char *)dest;
+	p_src = (char *)src;
+	if (!dest && !src)
+		return (NULL);
+	if (p_dest > p_src)
 	{
-		len++;
-		num = num / 16;
-	}
-	return (len);
-}
-
-void ft_hexa(unsigned int c)
-{
-	if (c >= 16)
-	{
-		ft_put_hex(c / 16);
-		ft_put_hex(c % 16);
-	}
-	else
-	{
-		if (c <= 9)
-			ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
-		return (write(1, "0", 1));
-		else
+		while (n--)
 		{
-				ft_putchar_fd((c - 10 + 'a'), 1);
+			p_dest[n] = p_src[n];
 		}
 	}
+	else if (p_dest < p_src)
+		ft_memcpy(dest, src, n);
+	return (dest);
 }

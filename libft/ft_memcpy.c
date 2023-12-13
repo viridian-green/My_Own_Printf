@@ -1,47 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:23 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 13:44:44 by ademarti         ###   ########.fr       */
+/*   Created: 2023/11/14 15:27:46 by ademarti          #+#    #+#             */
+/*   Updated: 2023/12/05 15:07:56 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_hex_len(unsigned	int num)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int	len;
+	unsigned char		*p_dest;
+	const unsigned char	*p_src;
+	size_t				i;
 
-	len = 0;
-	while (num != 0)
+	p_dest = (unsigned char *)dest;
+	p_src = (const unsigned char *)src;
+	i = 0;
+	if (dest == src)
 	{
-		len++;
-		num = num / 16;
+		return (dest);
 	}
-	return (len);
-}
-
-void ft_hexa(unsigned int c)
-{
-	if (c >= 16)
+	while (i < n)
 	{
-		ft_put_hex(c / 16);
-		ft_put_hex(c % 16);
+		p_dest[i] = p_src[i];
+		i++;
 	}
-	else
-	{
-		if (c <= 9)
-			ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
-		return (write(1, "0", 1));
-		else
-		{
-				ft_putchar_fd((c - 10 + 'a'), 1);
-		}
-	}
+	return (dest);
 }

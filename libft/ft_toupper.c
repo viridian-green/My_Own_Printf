@@ -1,47 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:23 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 13:44:44 by ademarti         ###   ########.fr       */
+/*   Created: 2023/11/16 11:23:53 by ademarti          #+#    #+#             */
+/*   Updated: 2023/12/05 15:10:49 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
-
-size_t	ft_hex_len(unsigned	int num)
+int	ft_toupper(int c)
 {
-	int	len;
-
-	len = 0;
-	while (num != 0)
+	if (c >= 'a' && c <= 'z')
 	{
-		len++;
-		num = num / 16;
+		c = c - 32;
 	}
-	return (len);
-}
-
-void ft_hexa(unsigned int c)
-{
-	if (c >= 16)
-	{
-		ft_put_hex(c / 16);
-		ft_put_hex(c % 16);
-	}
-	else
-	{
-		if (c <= 9)
-			ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
-		return (write(1, "0", 1));
-		else
-		{
-				ft_putchar_fd((c - 10 + 'a'), 1);
-		}
-	}
+	return (c);
 }

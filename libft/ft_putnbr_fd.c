@@ -1,47 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:23 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 13:44:44 by ademarti         ###   ########.fr       */
+/*   Created: 2023/12/05 15:08:54 by ademarti          #+#    #+#             */
+/*   Updated: 2023/12/12 17:18:17 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_hex_len(unsigned	int num)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	len;
-
-	len = 0;
-	while (num != 0)
+	if (n == -2147483648)
 	{
-		len++;
-		num = num / 16;
+		write(fd, "-2147483648", 11);
+		return ;
 	}
-	return (len);
-}
-
-void ft_hexa(unsigned int c)
-{
-	if (c >= 16)
+	if (n < 0)
 	{
-		ft_put_hex(c / 16);
-		ft_put_hex(c % 16);
+		ft_putchar_fd('-', fd);
+		n = -n;
 	}
-	else
+	if (n >= 10)
 	{
-		if (c <= 9)
-			ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
-		return (write(1, "0", 1));
-		else
-		{
-				ft_putchar_fd((c - 10 + 'a'), 1);
-		}
+		ft_putnbr_fd(n / 10, fd);
 	}
+	ft_putchar_fd(n % 10 + '0', fd);
 }

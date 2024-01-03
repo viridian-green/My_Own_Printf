@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:40:31 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/03 13:27:00 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:51:38 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ if (s[i] == 'p' )
 	return (-1);
 }
 
-int	writeformat(const char *s, va_list args_copy)
+ int	writeformat(const char *s, va_list args_copy)
 {
 	size_t	i;
 	size_t len;
@@ -203,6 +203,31 @@ int	writeformat(const char *s, va_list args_copy)
 	return (len);
 }
 
+/*
+int	writeformat(const char *s, va_list args_copy)
+{
+	size_t	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == '%')
+		{
+			i++;
+			data_type_check(&s[i], args_copy);
+		}
+		else
+		{
+			write(1, &s[i], 1);
+		}
+		i++;
+	}
+	va_end(args_copy);
+	return (count);
+}
+*/
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
@@ -212,14 +237,14 @@ int	ft_printf(const char *format, ...)
     va_copy(args_copy, args);
 	int len = writeformat(format, args_copy);
 	va_end(args);
-	return len;
+	return (len);
 }
 
 
 int main()
 {
 	//unsigned int n = 255;
-	ft_printf("%%");
-	printf("%%");
+	//ft_printf("%%");
+	printf("%d", ft_printf("%c", l));
 }
 

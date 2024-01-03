@@ -6,7 +6,7 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:40:31 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/03 13:51:38 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:10:56 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_string(char *str)
 		if (str[i] == '%')
 		{
 			ft_putchar_fd(str[i], 1);
-			return (i);
+			return (1);
 		}
 		ft_putchar_fd(str[i], 1);
 		i++;
@@ -147,7 +147,7 @@ void ft_hexa_uppercase(unsigned int c)
 	}
 }
 
-static int data_type_check(const char *s, va_list args_copy)
+int data_type_check(const char *s, va_list args_copy)
 {
 	size_t	i;
 
@@ -192,6 +192,7 @@ if (s[i] == 'p' )
 			{
 				return (-1);
 			}
+		len += size;
 		}
 		else
 		{
@@ -239,12 +240,12 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
-
+// my printf does not return the good int.The error is in the printformat function.
 
 int main()
 {
 	//unsigned int n = 255;
 	//ft_printf("%%");
-	printf("%d", ft_printf("%c", l));
+	printf("%d", ft_printf("%%"));
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:07:02 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/03 13:44:17 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:49:27 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <unistd.h>
 
 int	ft_printf(const char *format, ...);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putnbr_fd_un(unsigned int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
-int	ft_string(char *str);
+int	ft_putchar_fd(char c, int fd);
+int	ft_putnbr_fd(int n, int fd);
+int	ft_putnbr_fd_un(unsigned int n, int fd);
+int	ft_putstr_fd(char *s, int fd);
+size_t	ft_string(char *str);
 #endif

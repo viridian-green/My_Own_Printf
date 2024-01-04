@@ -6,22 +6,36 @@
 /*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:40:31 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/04 11:17:29 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:37:30 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+//#include "../include/ft_printf.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-int ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
-	int count;
+	int	count;
+
 	count = 0;
 	write(fd, &c, 1);
 	count++;
 	return (count);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
 }
 
 int	ft_string(char *str)
@@ -93,7 +107,7 @@ int ft_hexa_lowercase(unsigned int c)
 	{
 		if (c <= 9)
 			count += ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
+		else if (c == 0)
 		{
 			count += write(1, "0", 1);
 			return (count);
@@ -120,7 +134,7 @@ int	ft_hexa_uppercase(unsigned int c)
 	{
 		if (c <= 9)
 			count += ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
+		else if (c == 0)
 		{
 			count +=  write(1, "0", 1);
 			return (count);
@@ -132,26 +146,49 @@ int	ft_hexa_uppercase(unsigned int c)
 	}
 	return (count);
 }
-/*
-int	put_ptr(void *p, va_list args_copy)
+
+int	ft_put_ptr(unsigned long long num)
+{
+
+	int count;
+
+	count = 0;
+	if (num >= 16)
+	{
+		count += ft_put_ptr(num / 16);
+		count += ft_put_ptr(num % 16);
+	}
+	else
+	{
+		if (num <= 9)
+			count += ft_putchar_fd((num + '0'), 1);
+		else
+		{
+			count += ft_putchar_fd((num - 10 + 'a'), 1);
+		}
+	}
+	return (count);
+}
+
+int	ft_print_ptr(void *ptr)
 {
 	int	count;
-	char buffer[20];
-	char *hexDigits = "0123456789abcdef";
-	char *ptr;
-	unsigned long	ptr_address;
+	unsigned long long un_ptr = (unsigned long long)ptr;
 
-	ptr_address = (unsigned long)ptr;
 	count = 0;
-	i = 0;
-	while
+	count += write(1, "0x", 2);
+	if (ptr == 0)
+		count += write(1, "0", 1);
+	else
+	{
+		count += ft_put_ptr(un_ptr);
+	}
+	return (count);
 }
-*/
+
 int	data_type_check(const char *s, va_list args_copy)
 {
-	int i;
-	int count;
-	count = 0;
+	int	i;
 
 	i = 0;
 	if (s[i] == 'c')
@@ -168,11 +205,10 @@ int	data_type_check(const char *s, va_list args_copy)
 		return  ft_hexa_lowercase(va_arg(args_copy, unsigned int));
 	else if (s[i] == 'X' )
 		return ft_hexa_uppercase(va_arg(args_copy, unsigned int));
-	/*
 	else if (s[i] == 'p' )
-		return ft_put_ptr(va_arg(args_copy, size_t));
-	*/
-	return (count);
+		return ft_print_ptr(va_arg(args_copy, void *));
+
+	return (-1);
 }
 
 int writeformat(const char *s, va_list args_copy)
@@ -203,6 +239,7 @@ int writeformat(const char *s, va_list args_copy)
 	va_end(args_copy);
 	return (size);
 }
+
 int ft_printf(const char *format, ...)
 {
 	va_list args;
@@ -215,13 +252,13 @@ int ft_printf(const char *format, ...)
 	return (len);
 }
 
-/*
+
 int main()
 {
 	// ft_printf("%d", 12);
-	//printf("%d", ft_printf(" %s ", "hey"));;
-	//ft_printf(" %s ", "hey");
-	//printf(" %s \n", "hey");
-
+	//printf("%d", printf(" %x ", 17));;
+	//ft_printf("%p \n", "hey");
+	//printf("%p \n", "hey");
+	printf("%s", "some string with %s hehe");
 }
-*/
+

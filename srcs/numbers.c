@@ -6,11 +6,11 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:51:28 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/05 16:28:13 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:51:00 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	ft_putnbr_fd(int n, int fd)
 {

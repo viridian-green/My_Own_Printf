@@ -6,11 +6,11 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:55:08 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/05 16:33:40 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:51:44 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	ft_put_ptr(unsigned long long num)
 {

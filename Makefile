@@ -1,6 +1,8 @@
 NAME			= libftprintf.a
 
-SRCS = printf.c numbers.c characters.c ptr.c\
+SRCS = srcs/printf.c srcs/numbers.c srcs/characters.c srcs/ptr.c\
+
+INCLUDES = include/ft_printf.h
 
 OBJS := $(SRCS:%.c=%.o)
 

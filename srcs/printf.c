@@ -6,12 +6,11 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:40:31 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/05 16:37:32 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:51:04 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-//#include "../include/ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	data_type_check(const char *s, va_list args_copy)
 {
@@ -85,5 +84,5 @@ int main()
 	//printf("%p \n", "hey");
 	ft_printf("hello%\0asdasds");
 }
-/*
+*/
 

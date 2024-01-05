@@ -1,6 +1,6 @@
 NAME			= libftprintf.a
 
-SRCS = printf.c ft_putchar.c\
+SRCS = printf.c numbers.c characters.c ptr.c\
 
 OBJS := $(SRCS:%.c=%.o)
 

@@ -8,6 +8,7 @@
 		"chrono": "c",
 		"unordered_map": "c",
 		"ratio": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"stdarg.h": "c"
 	}
 }

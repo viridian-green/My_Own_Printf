@@ -6,9 +6,11 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:55:08 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/05 16:00:20 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:33:40 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int	ft_put_ptr(unsigned long long num)
 {
@@ -28,6 +30,23 @@ int	ft_put_ptr(unsigned long long num)
 		{
 			count += ft_putchar_fd((num - 10 + 'a'), 1);
 		}
+	}
+	return (count);
+}
+
+int	ft_print_ptr(void *ptr)
+{
+	int					count;
+	unsigned long long	un_ptr;
+
+	un_ptr = (unsigned long long)ptr;
+	count = 0;
+	count += write(1, "0x", 2);
+	if (ptr == 0)
+		count += write(1, "0", 1);
+	else
+	{
+		count += ft_put_ptr(un_ptr);
 	}
 	return (count);
 }

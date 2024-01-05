@@ -6,22 +6,11 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:51:28 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/05 15:59:56 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:28:13 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_putnbr_fd_un(unsigned int n, int fd)
-{
-	int	count;
-
-	count = 0;
-	if (n >= 10)
-	{
-		count += ft_putnbr_fd(n / 10, fd);
-	}
-	count += ft_putchar_fd(n % 10 + '0', fd);
-	return (count);
-}
+#include "ft_printf.h"
 
 int	ft_putnbr_fd(int n, int fd)
 {
@@ -38,6 +27,19 @@ int	ft_putnbr_fd(int n, int fd)
 		count += ft_putchar_fd('-', fd);
 		n = -n;
 	}
+	if (n >= 10)
+	{
+		count += ft_putnbr_fd(n / 10, fd);
+	}
+	count += ft_putchar_fd(n % 10 + '0', fd);
+	return (count);
+}
+
+int	ft_putnbr_fd_un(unsigned int n, int fd)
+{
+	int	count;
+
+	count = 0;
 	if (n >= 10)
 	{
 		count += ft_putnbr_fd(n / 10, fd);

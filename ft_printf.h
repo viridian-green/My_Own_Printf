@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:07:02 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/04 12:06:56 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:00:42 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
-# define PRINTF_H
+#define PRINTF_H
 
 # include <stdarg.h>
 # include <stdlib.h>

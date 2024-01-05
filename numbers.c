@@ -3,45 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   numbers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:23 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/13 13:44:44 by ademarti         ###   ########.fr       */
+/*   Created: 2024/01/05 15:51:28 by ademarti          #+#    #+#             */
+/*   Updated: 2024/01/05 15:59:56 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
-
-size_t	ft_hex_len(unsigned	int num)
+int	ft_putnbr_fd_un(unsigned int n, int fd)
 {
-	int	len;
+	int	count;
 
-	len = 0;
-	while (num != 0)
+	count = 0;
+	if (n >= 10)
 	{
-		len++;
-		num = num / 16;
+		count += ft_putnbr_fd(n / 10, fd);
 	}
-	return (len);
+	count += ft_putchar_fd(n % 10 + '0', fd);
+	return (count);
 }
 
-void ft_hexa(unsigned int c)
+int	ft_putnbr_fd(int n, int fd)
 {
+	int	count;
+
+	count = 0;
+	if (n == -2147483648)
+	{
+		count += write(fd, "-2147483648", 11);
+		return (count);
+	}
+	if (n < 0)
+	{
+		count += ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	if (n >= 10)
+	{
+		count += ft_putnbr_fd(n / 10, fd);
+	}
+	count += ft_putchar_fd(n % 10 + '0', fd);
+	return (count);
+}
+
+int	ft_hexa_lowercase(unsigned int c)
+{
+	int	count;
+
+	count = 0;
 	if (c >= 16)
 	{
-		ft_put_hex(c / 16);
-		ft_put_hex(c % 16);
+		count += ft_hexa_lowercase(c / 16);
+		count += ft_hexa_lowercase(c % 16);
 	}
 	else
 	{
 		if (c <= 9)
-			ft_putchar_fd((c + '0'), 1);
-		if (c == 0)
-		return (write(1, "0", 1));
+			count += ft_putchar_fd((c + '0'), 1);
+		else if (c == 0)
+		{
+			count += write(1, "0", 1);
+			return (count);
+		}
 		else
 		{
-				ft_putchar_fd((c - 10 + 'a'), 1);
+			count += ft_putchar_fd((c - 10 + 'a'), 1);
 		}
 	}
+	return (count);
+}
+
+int	ft_hexa_uppercase(unsigned int c)
+{
+	int	count;
+
+	count = 0;
+	if (c >= 16)
+	{
+		count += ft_hexa_uppercase(c / 16);
+		count += ft_hexa_uppercase(c % 16);
+	}
+	else
+	{
+		if (c <= 9)
+			count += ft_putchar_fd((c + '0'), 1);
+		else if (c == 0)
+		{
+			count += write(1, "0", 1);
+			return (count);
+		}
+		else
+		{
+			count += ft_putchar_fd((c - 10 + 'A'), 1);
+		}
+	}
+	return (count);
 }

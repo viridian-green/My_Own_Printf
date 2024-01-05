@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   characters.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademarti <adelemartin@student.42.fr>       +#+  +:+       +#+        */
+/*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 16:10:08 by ademarti          #+#    #+#             */
-/*   Updated: 2023/12/12 14:46:44 by ademarti         ###   ########.fr       */
+/*   Created: 2024/01/05 15:49:09 by ademarti          #+#    #+#             */
+/*   Updated: 2024/01/05 15:49:31 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
-
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
+	int	count;
+
+	count = 0;
 	write(fd, &c, 1);
+	count++;
+	return (count);
 }
 
 void	ft_putstr_fd(char *s, int fd)
@@ -30,13 +32,20 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-void ft_string(char *str, int fd)
+int	ft_string(char *str)
 {
-	ft_putstr_fd(str, fd);
+	int	i;
 
-}
-
-void ft_char(char c, int fd)
-{
-	ft_putchar_fd(c, fd);
+	i = 0;
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
+	while (str[i] != '\0')
+	{
+		ft_putchar_fd(str[i], 1);
+		i++;
+	}
+	return (i);
 }

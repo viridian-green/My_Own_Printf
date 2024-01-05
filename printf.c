@@ -6,7 +6,7 @@
 /*   By: ademarti <ademarti@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:40:31 by ademarti          #+#    #+#             */
-/*   Updated: 2024/01/05 14:11:13 by ademarti         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:58:43 by ademarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
+
+
 int	ft_string(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -51,11 +53,6 @@ int	ft_string(char *str)
 	}
 	while (str[i] != '\0')
 	{
-		if (str[i] == '%')
-		{
-			ft_putchar_fd(str[i], 1);
-			return (i);
-		}
 		ft_putchar_fd(str[i], 1);
 		i++;
 	}
@@ -141,6 +138,7 @@ int	ft_hexa_uppercase(unsigned int c)
 			return (count);
 		}
 		else
+
 		{
 			count += ft_putchar_fd((c - 10 + 'A'), 1);
 		}
@@ -190,12 +188,15 @@ int	ft_print_ptr(void *ptr)
 int	data_type_check(const char *s, va_list args_copy)
 {
 	int	i;
+	char *str_arg;
 
 	i = 0;
 	if (s[i] == 'c')
 		return ft_putchar_fd(va_arg(args_copy, int), 1);
 	else if (s[i] == 's')
-		return ft_string(va_arg(args_copy, char *));
+		str_arg = va_arg(args_copy, char *);
+    	if (str_arg != 0)
+        return ft_string(str_arg);
 	else if (s[i] == '%')
 		return write(1, "%", 1);
 	else if (s[i] == 'd' || s[i] == 'i')
@@ -235,7 +236,8 @@ int writeformat(const char *s, va_list args_copy)
 			write(1, &s[i], 1);
 			size++;
 		}
-		i++;
+		if (s[i] != '\0')
+			i++;
 	}
 	va_end(args_copy);
 	return (size);
@@ -260,5 +262,5 @@ int main()
 	//printf("%d", printf(" %x ", 17));;
 	//ft_printf("%p \n", "hey");
 	//printf("%p \n", "hey");
-	printf("%s", "some string with %s hehe");
+	printf("%s", "some string with\0 hehe");
 }

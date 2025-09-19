@@ -45,7 +45,7 @@ The function mimics the behavior of the original `printf()` while implementing c
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/viridian-green/ft_printf.git
+   git clone https://github.com/viridian-green/My_Own_Printf.git
    cd ft_printf
    ```
 
